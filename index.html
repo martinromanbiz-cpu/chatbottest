@@ -1,65 +1,119 @@
 <!doctype html>
 <html lang="cs">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>n8n chat demo</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" />
-    <style>
-  body {
-    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #f6f8fb;
-    color: #1f2937;
-    margin: 0;
-    padding: 0;
-  }
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Automatizovaný asistent – Demo</title>
 
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 80px 24px;
-  }
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-  h1 {
-    font-size: 40px;
-    font-weight: 600;
-    margin-bottom: 16px;
-  }
+  <!-- n8n Chat styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" />
 
-  p.subtitle {
-    font-size: 18px;
-    color: #6b7280;
-    max-width: 600px;
-  }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-  .features {
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 24px;
-  }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f6f8fb;
+      color: #1f2937;
+      line-height: 1.6;
+    }
 
-  .feature {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.06);
-    font-size: 15px;
-  }
-</style>
-  </head>
-  <body>
-    <h1>Demo – Chat</h1>
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 96px 24px;
+    }
 
-    <script type="module">
-      import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
+    h1 {
+      font-size: 42px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
 
-      createChat({
-        webhookUrl: "https://martinroman36.app.n8n.cloud/webhook/ec382617-7a59-4c98-8cbd-5b184c9798ea/chat",
-        mode: "window",
-        showWelcomeScreen: true,
-        initialMessages: ["Dobrý den, mohu vám pomoci?"]
-      });
-    </script>
-  </body>
+    .subtitle {
+      font-size: 18px;
+      color: #6b7280;
+      max-width: 640px;
+    }
+
+    .features {
+      margin-top: 56px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .feature {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      font-size: 15px;
+    }
+
+    .feature strong {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    footer {
+      margin-top: 80px;
+      font-size: 14px;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Automatizovaný asistent komunikace</h1>
+    <p class="subtitle">
+      Ukázka systému, který odbaví běžné dotazy zákazníků, roztřídí komunikaci
+      a zapojí člověka jen tam, kde je to opravdu potřeba.
+    </p>
+
+    <div class="features">
+      <div class="feature">
+        <strong>Odpovědi 24/7</strong>
+        Běžné dotazy jsou vyřešeny okamžitě bez zatížení týmu nebo recepce.
+      </div>
+      <div class="feature">
+        <strong>Chytré předání</strong>
+        Složitější dotazy jsou automaticky předány odpovědné osobě.
+      </div>
+      <div class="feature">
+        <strong>Přehled a kontrola</strong>
+        Každý dotaz je zaznamenán a lze ho dále analyzovat nebo řešit.
+      </div>
+    </div>
+
+    <footer>
+      Demo ukázka automatizace komunikace – neprodukční prostředí
+    </footer>
+  </div>
+
+  <!-- n8n Chat widget -->
+  <script type="module">
+    import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
+
+    createChat({
+      webhookUrl: "https://martinroman36.app.n8n.cloud/webhook/ec382617-7a59-4c98-8cbd-5b184c9798ea/chat",
+      mode: "window",
+      showWelcomeScreen: true,
+      initialMessages: [
+        "Dobrý den, mohu vám pomoci s dotazy k objednávce, službám nebo předat zprávu týmu?"
+      ]
+    });
+  </script>
+</body>
 </html>
