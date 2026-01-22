@@ -3,116 +3,695 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Automatizovaný asistent – Demo</title>
+  <title>Hotel Test Park ***** | Official Site</title>
 
   <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <!-- n8n Chat styles -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
+    :root{
+      --bg: #0b1220;
+      --card: rgba(255,255,255,0.08);
+      --card2: rgba(255,255,255,0.12);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --gold: #d7b56d;
+      --gold2:#f0d9a3;
+      --line: rgba(255,255,255,0.14);
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --shadow2: 0 12px 30px rgba(0,0,0,.45);
+      --radius: 18px;
     }
 
-    body {
-      margin: 0;
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body{
+      margin:0;
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #f6f8fb;
-      color: #1f2937;
-      line-height: 1.6;
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 18% 18%, rgba(215,181,109,0.22), rgba(11,18,32,0) 55%),
+                  radial-gradient(900px 600px at 80% 20%, rgba(240,217,163,0.16), rgba(11,18,32,0) 55%),
+                  radial-gradient(900px 700px at 50% 90%, rgba(59,130,246,0.12), rgba(11,18,32,0) 55%),
+                  linear-gradient(180deg, #050812, #0b1220 55%, #050812);
+      overflow-x:hidden;
     }
 
-    .container {
-      max-width: 960px;
+    /* Top nav */
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(5,8,18,0.55);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner{
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 96px 24px;
+      padding: 14px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 16px;
     }
-
-    h1 {
-      font-size: 42px;
-      font-weight: 600;
-      margin-bottom: 16px;
-      letter-spacing: -0.02em;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-weight:600;
+      letter-spacing:0.2px;
     }
-
-    .subtitle {
-      font-size: 18px;
-      color: #6b7280;
-      max-width: 640px;
+    .crest{
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(215,181,109,0.35), rgba(240,217,163,0.18));
+      border: 1px solid rgba(215,181,109,0.35);
+      box-shadow: 0 10px 20px rgba(0,0,0,.25);
+      display:grid;
+      place-items:center;
+      font-family: "Playfair Display", serif;
+      color: var(--gold2);
     }
-
-    .features {
-      margin-top: 56px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 24px;
-    }
-
-    .feature {
-      background: #ffffff;
-      border-radius: 14px;
-      padding: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-      font-size: 15px;
-    }
-
-    .feature strong {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
-
-    footer {
-      margin-top: 80px;
+    .nav-links{
+      display:flex;
+      gap: 18px;
+      color: var(--muted);
       font-size: 14px;
-      color: #9ca3af;
+    }
+    .nav-links a{
+      color: inherit;
+      text-decoration:none;
+      padding: 8px 10px;
+      border-radius: 10px;
+      transition: all .2s ease;
+    }
+    .nav-links a:hover{
+      color: var(--text);
+      background: rgba(255,255,255,0.06);
+    }
+    .cta{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+    .btn{
+      border: 1px solid rgba(215,181,109,0.40);
+      background: linear-gradient(135deg, rgba(215,181,109,0.22), rgba(240,217,163,0.10));
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight: 600;
+      box-shadow: 0 10px 22px rgba(0,0,0,.25);
+      transition: transform .15s ease, background .15s ease;
+      text-decoration:none;
+      font-size: 14px;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+
+    /* Layout */
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 54px 20px 90px;
+      display:grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 26px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .wrap{ grid-template-columns: 1fr; }
+      .nav-links{ display:none; }
+    }
+
+    /* Hero */
+    .hero{
+      border-radius: var(--radius);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.10);
+      background:
+        radial-gradient(1000px 500px at 25% 25%, rgba(215,181,109,0.18), transparent 55%),
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      position:relative;
+      padding: 34px;
+      min-height: 420px;
+    }
+
+    /* “Fake photo” gradient panels (no external images needed) */
+    .hero-photo{
+      position:absolute;
+      inset: 0;
+      opacity: 0.85;
+      background:
+        radial-gradient(900px 500px at 30% 40%, rgba(240,217,163,0.22), transparent 60%),
+        radial-gradient(800px 500px at 70% 20%, rgba(59,130,246,0.16), transparent 65%),
+        radial-gradient(900px 700px at 60% 85%, rgba(215,181,109,0.18), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
+      filter: saturate(1.1);
+    }
+    .hero-content{
+      position:relative;
+      z-index: 2;
+      max-width: 620px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(215,181,109,0.35);
+      background: rgba(0,0,0,0.22);
+      color: var(--gold2);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.2px;
+    }
+    .stars{
+      letter-spacing: 1px;
+      color: var(--gold2);
+    }
+    h1{
+      font-family: "Playfair Display", serif;
+      font-weight: 600;
+      font-size: 52px;
+      line-height: 1.05;
+      margin: 18px 0 12px;
+      letter-spacing:-0.02em;
+    }
+    .lead{
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 58ch;
+      margin: 0 0 18px;
+    }
+    .hero-actions{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .btn-secondary{
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* Cards */
+    .side{
+      display:flex;
+      flex-direction:column;
+      gap: 16px;
+    }
+    .card{
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: var(--shadow2);
+      padding: 18px;
+    }
+    .card h3{
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: var(--gold2);
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+    .card p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .grid-amen{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .pill{
+      padding: 10px 10px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* Sections below */
+    .sections{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+    }
+    @media (max-width: 980px){
+      .sections{ grid-template-columns: 1fr; }
+    }
+    .section{
+      border-radius: var(--radius);
+      padding: 20px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: var(--shadow2);
+    }
+    .section h2{
+      margin: 0 0 10px;
+      font-size: 18px;
+      font-family: "Playfair Display", serif;
+      color: rgba(255,255,255,0.92);
+    }
+    .section ul{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Footer */
+    .foot{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+      color: rgba(255,255,255,0.45);
+      font-size: 13px;
+    }
+
+    /* --- Custom Chat UI (floating) --- */
+    .chat-fab{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 9999;
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      border: 1px solid rgba(215,181,109,0.45);
+      background: linear-gradient(135deg, rgba(215,181,109,0.26), rgba(240,217,163,0.10));
+      box-shadow: 0 18px 50px rgba(0,0,0,.55);
+      cursor: pointer;
+      display:grid;
+      place-items:center;
+      color: rgba(255,255,255,0.92);
+      font-weight: 700;
+      user-select:none;
+      transition: transform .15s ease;
+    }
+    .chat-fab:hover{ transform: translateY(-1px); }
+
+    .chat-panel{
+      position: fixed;
+      right: 18px;
+      bottom: 86px;
+      z-index: 9999;
+      width: 360px;
+      max-width: calc(100vw - 36px);
+      height: 520px;
+      max-height: calc(100vh - 120px);
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(8,12,22,0.72);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 24px 80px rgba(0,0,0,.65);
+      overflow:hidden;
+      display:none;
+      flex-direction:column;
+    }
+
+    .chat-header{
+      padding: 14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      background: linear-gradient(135deg, rgba(215,181,109,0.16), rgba(255,255,255,0.06));
+    }
+    .chat-title{
+      display:flex;
+      flex-direction:column;
+      gap: 2px;
+    }
+    .chat-title strong{
+      font-size: 14px;
+      letter-spacing:0.2px;
+    }
+    .chat-title span{
+      font-size: 12px;
+      color: rgba(255,255,255,0.72);
+    }
+    .chat-close{
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.88);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor:pointer;
+      font-weight: 600;
+    }
+
+    .chat-body{
+      padding: 14px;
+      overflow:auto;
+      flex: 1;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .msg{
+      max-width: 85%;
+      padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.10);
+      font-size: 13.5px;
+      line-height: 1.45;
+      white-space: pre-wrap;
+    }
+    .msg.bot{
+      align-self:flex-start;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.88);
+    }
+    .msg.user{
+      align-self:flex-end;
+      background: rgba(215,181,109,0.20);
+      border-color: rgba(215,181,109,0.30);
+      color: rgba(255,255,255,0.95);
+    }
+
+    .chat-footer{
+      padding: 12px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      background: rgba(255,255,255,0.04);
+    }
+    .chat-input{
+      flex: 1;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.18);
+      color: rgba(255,255,255,0.92);
+      padding: 11px 12px;
+      outline:none;
+      font-size: 13.5px;
+    }
+    .chat-input::placeholder{
+      color: rgba(255,255,255,0.55);
+    }
+    .chat-send{
+      border-radius: 14px;
+      border: 1px solid rgba(215,181,109,0.45);
+      background: linear-gradient(135deg, rgba(215,181,109,0.24), rgba(240,217,163,0.08));
+      color: rgba(255,255,255,0.92);
+      padding: 11px 14px;
+      cursor:pointer;
+      font-weight: 700;
+    }
+    .chat-send:disabled{
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .typing{
+      font-size: 12px;
+      color: rgba(255,255,255,0.60);
+      padding: 0 14px 10px;
+    }
+
+    .quick{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      padding: 0 14px 12px;
+    }
+    .chip{
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.86);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      cursor:pointer;
+    }
+    .chip:hover{
+      background: rgba(255,255,255,0.08);
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <h1>Automatizovaný asistent komunikace</h1>
-    <p class="subtitle">
-      Ukázka systému, který odbaví běžné dotazy zákazníků, roztřídí komunikaci
-      a zapojí člověka jen tam, kde je to opravdu potřeba.
-    </p>
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="crest">TP</div>
+        <div>
+          Hotel Test Park <span class="stars">★★★★★</span>
+        </div>
+      </div>
 
-    <div class="features">
-      <div class="feature">
-        <strong>Odpovědi 24/7</strong>
-        Běžné dotazy jsou vyřešeny okamžitě bez zatížení týmu nebo recepce.
+      <div class="nav-links">
+        <a href="#pokoje">Pokoje</a>
+        <a href="#sluzby">Služby</a>
+        <a href="#pribeh">Příběh</a>
+        <a href="#kontakt">Kontakt</a>
       </div>
-      <div class="feature">
-        <strong>Chytré předání</strong>
-        Složitější dotazy jsou automaticky předány odpovědné osobě.
+
+      <div class="cta">
+        <a class="btn" href="#rezervace">Rezervovat pobyt</a>
       </div>
-      <div class="feature">
-        <strong>Přehled a kontrola</strong>
-        Každý dotaz je zaznamenán a lze ho dále analyzovat nebo řešit.
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="hero-photo"></div>
+
+      <div class="hero-content">
+        <div class="badge">
+          <span>Official site</span>
+          <span style="opacity:.75">•</span>
+          <span>Klid v parku, luxus v detailu</span>
+        </div>
+
+        <h1>Hotel Test Park</h1>
+        <p class="lead">
+          Pětihvězdičkový boutique hotel v tichém parku. 38 pokojů, wellness, fine dining
+          a servis, který není hlasitý. Je jen přesný.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn" href="#rezervace">Zkontrolovat dostupnost</a>
+          <a class="btn btn-secondary" href="#sluzby">Prohlédnout služby</a>
+        </div>
+
+        <p style="margin-top:16px;color:rgba(255,255,255,0.60);font-size:13px;">
+          Check-in 14:00–22:00 • Check-out do 11:00 • Parkování v areálu
+        </p>
       </div>
     </div>
 
-    <footer>
-      Demo ukázka automatizace komunikace – neprodukční prostředí
-    </footer>
+    <div class="side">
+      <div class="card" id="rezervace">
+        <h3>Rychlé informace</h3>
+        <p>
+          Pokud něco nevíte, napište do chatu. Asistent vyřeší běžné dotazy a složitější předá recepci.
+        </p>
+        <div class="grid-amen">
+          <div class="pill">Wellness & Spa</div>
+          <div class="pill">Fine dining</div>
+          <div class="pill">Concierge</div>
+          <div class="pill">Airport transfer</div>
+        </div>
+      </div>
+
+      <div class="card" id="kontakt">
+        <h3>Kontakt</h3>
+        <p>
+          Telefon: +420 777 000 000<br/>
+          E-mail: reservations@testpark-hotel.example<br/>
+          Adresa: Parková 12, 702 00 Ostrava
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Hodnocení hostů</h3>
+        <p>
+          „Dokonalý klid, perfektní servis a snídaně, na kterou se těšíte už večer.“
+          <span style="display:block;margin-top:8px;color:rgba(255,255,255,0.55);font-size:13px;">– hosté (demo)</span>
+        </p>
+      </div>
+    </div>
   </div>
 
-  <!-- n8n Chat widget -->
-  <script type="module">
-    import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
+  <div class="sections">
+    <div class="section" id="pokoje">
+      <h2>Pokoje & Suite</h2>
+      <ul>
+        <li>38 pokojů, prémiové matrace, ticho (ano, skutečné ticho)</li>
+        <li>Suite s výhledem do parku, minibar, room service</li>
+        <li>Volitelně pozdní check-out dle dostupnosti</li>
+      </ul>
+    </div>
 
-    createChat({
-      webhookUrl: "https://martinroman36.app.n8n.cloud/webhook/ec382617-7a59-4c98-8cbd-5b184c9798ea/chat",
-      mode: "window",
-      showWelcomeScreen: true,
-      initialMessages: [
-        "Dobrý den, mohu vám pomoci s dotazy k objednávce, službám nebo předat zprávu týmu?"
-      ]
+    <div class="section" id="sluzby">
+      <h2>Služby</h2>
+      <ul>
+        <li>Wellness: sauna, masáže, relax zóna</li>
+        <li>Restaurace: degustační menu, lokální suroviny</li>
+        <li>Concierge: transfer, tipy, rezervace aktivit</li>
+      </ul>
+    </div>
+
+    <div class="section" id="pribeh">
+      <h2>Příběh hotelu</h2>
+      <ul>
+        <li>Historie: původně zámecký pavilon (demo příběh)</li>
+        <li>Rekonstrukce: důraz na detail a akustiku</li>
+        <li>Filozofie: méně hluku, více komfortu</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot">
+    Demo stránka „Hotel Test Park *****“ slouží pouze jako ukázka. Nejedná se o reálný hotel.
+  </div>
+
+  <!-- Floating Chat -->
+  <button class="chat-fab" id="chatFab" aria-label="Otevřít chat">💬</button>
+
+  <div class="chat-panel" id="chatPanel" role="dialog" aria-label="Hotel chat">
+    <div class="chat-header">
+      <div class="chat-title">
+        <strong>Hotel asistence</strong>
+        <span>Odpovědi na běžné dotazy, případně předání recepci</span>
+      </div>
+      <button class="chat-close" id="chatClose">Zavřít</button>
+    </div>
+
+    <div class="chat-body" id="chatBody"></div>
+
+    <div class="quick" id="quickChips">
+      <button class="chip" data-q="Kdy je check-in a check-out?">Check-in / out</button>
+      <button class="chip" data-q="Jak je to s parkováním?">Parkování</button>
+      <button class="chip" data-q="Máte wellness a jaké jsou časy?">Wellness</button>
+      <button class="chip" data-q="Chci změnit rezervaci.">Změna rezervace</button>
+    </div>
+
+    <div class="typing" id="typing" style="display:none;">Asistent píše…</div>
+
+    <div class="chat-footer">
+      <input class="chat-input" id="chatInput" placeholder="Napište dotaz…" autocomplete="off" />
+      <button class="chat-send" id="chatSend">Odeslat</button>
+    </div>
+  </div>
+
+  <script>
+    // === Config ===
+    const N8N_CHAT_URL = "https://martinroman36.app.n8n.cloud/webhook/ec382617-7a59-4c98-8cbd-5b184c9798ea/chat";
+
+    // === UI elements ===
+    const fab = document.getElementById("chatFab");
+    const panel = document.getElementById("chatPanel");
+    const closeBtn = document.getElementById("chatClose");
+    const body = document.getElementById("chatBody");
+    const input = document.getElementById("chatInput");
+    const sendBtn = document.getElementById("chatSend");
+    const typing = document.getElementById("typing");
+    const quick = document.getElementById("quickChips");
+
+    // === simple session id ===
+    const sessionId = (() => {
+      const key = "tp_session_id";
+      let v = localStorage.getItem(key);
+      if (!v) {
+        v = "tp_" + Math.random().toString(16).slice(2) + "_" + Date.now();
+        localStorage.setItem(key, v);
+      }
+      return v;
+    })();
+
+    function addMsg(text, who){
+      const div = document.createElement("div");
+      div.className = "msg " + who;
+      div.textContent = text;
+      body.appendChild(div);
+      body.scrollTop = body.scrollHeight;
+    }
+
+    function openChat(){
+      panel.style.display = "flex";
+      input.focus();
+      if (body.childElementCount === 0){
+        addMsg("Dobrý den, s čím mohu pomoci? (např. check-in, parkování, wellness, rezervace)", "bot");
+      }
+    }
+    function closeChat(){
+      panel.style.display = "none";
+    }
+
+    fab.addEventListener("click", openChat);
+    closeBtn.addEventListener("click", closeChat);
+
+    quick.addEventListener("click", (e) => {
+      const btn = e.target.closest(".chip");
+      if (!btn) return;
+      const q = btn.getAttribute("data-q");
+      if (q) {
+        input.value = q;
+        input.focus();
+      }
+    });
+
+    async function send(){
+      const text = input.value.trim();
+      if (!text) return;
+
+      addMsg(text, "user");
+      input.value = "";
+      sendBtn.disabled = true;
+      typing.style.display = "block";
+
+      try{
+        const res = await fetch(N8N_CHAT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chatInput: text,
+            sessionId
+          })
+        });
+
+        // n8n embedded chat endpoints can return different shapes depending on your last node.
+        // We'll attempt to extract a sensible reply.
+        const data = await res.json();
+
+        const reply =
+          data?.response_to_chat ??
+          data?.reply ??
+          data?.text ??
+          data?.output ??
+          (typeof data === "string" ? data : null) ??
+          "Děkuji. Dotaz předám recepci, ozveme se vám osobně.";
+
+        addMsg(reply, "bot");
+      } catch (err){
+        addMsg("Omlouvám se, teď se nelze připojit. Zkuste to prosím za chvíli.", "bot");
+      } finally {
+        typing.style.display = "none";
+        sendBtn.disabled = false;
+        input.focus();
+      }
+    }
+
+    sendBtn.addEventListener("click", send);
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") send();
     });
   </script>
 </body>
